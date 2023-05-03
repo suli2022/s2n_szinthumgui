@@ -222,17 +222,23 @@ public class MainFrame extends javax.swing.JFrame {
         String url = "jdbc:mariadb://localhost:3306/szinthum";
         con = DriverManager.getConnection(url, "szinthum", "titok");
         
-        for(Employee emp : this.employeeList) {
-            String sql = "insert into employees " +
-                    "(name, city, salary, birthdate) values " +
-                    "(?, ?, ?, ?)";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, emp.name);
-            pstmt.setString(2, emp.city);
-            pstmt.setDouble(3, emp.salary);
-            pstmt.setDate(4, Date.valueOf(LocalDate.MAX).valueOf(emp.birthdate));
-            pstmt.execute();
-        }
+        Employee emp = new Employee(                
+                nameField.getText(),
+                cityField.getText(),
+                Double.parseDouble(salaryField.getText()),
+                LocalDate.parse(birthdateField.getText())                
+        );
+        
+        String sql = "insert into employees " +
+                "(name, city, salary, birthdate) values " +
+                "(?, ?, ?, ?)";
+        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt.setString(1, emp.name);
+        pstmt.setString(2, emp.city);
+        pstmt.setDouble(3, emp.salary);
+        pstmt.setDate(4, Date.valueOf(LocalDate.MAX).valueOf(emp.birthdate));
+        pstmt.execute();
+        
         System.out.println("Beszúrás vége");
     }
     

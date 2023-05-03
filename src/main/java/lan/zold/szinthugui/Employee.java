@@ -8,6 +8,17 @@ public class Employee {
     String city;
     Double salary;
     LocalDate birthdate;
+
+    public Employee(
+            String name, 
+            String city, 
+            Double salary, 
+            LocalDate birthdate) {
+        this.name = name;
+        this.city = city;
+        this.salary = salary;
+        this.birthdate = birthdate;
+    }
     
     public Employee(
             Integer id, 
